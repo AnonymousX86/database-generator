@@ -31,3 +31,15 @@ Form uses client-side validation. So server-side validation is optional.
 
 `db_rows` is never predefined.
 
+## How to use
+
+**Important!** Project uses JS and PHP, so to use this generator you have to use PHP interpreter.
+
+Please follow these steps:
+
+1. Install `node.js` from <https://nodejs.org/en/>.
+2. Download code.
+3. Run `npm run build` in project root directory.
+4. Copy `dist` folder to the web server.
+5. Open any web browser and access `dist` folder.
+
