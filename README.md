@@ -20,6 +20,8 @@ These are variables accessible via `$_POST[]` array.
 | db_name         | Database name.                        | 3 - 40 characters.         |
 | db_tables_count | Number of tables to generate.         | 1 - 3.                     |
 
+Form uses client-side validation. So server-side validation is optional.
+
 ### Predefined databases
 
 | predefined      | students-marks  |
