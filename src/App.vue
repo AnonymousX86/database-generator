@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-container :fluid="true">
+    <b-container :fluid="true" class="mt-4">
       <MainForm />
     </b-container>
   </div>
@@ -21,6 +21,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
