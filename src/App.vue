@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <MainForm />
+    <b-container :fluid="true">
+      <MainForm />
+    </b-container>
   </div>
 </template>
 
