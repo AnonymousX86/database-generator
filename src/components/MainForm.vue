@@ -143,6 +143,7 @@ export default {
   methods: {
     onSubmit(e) {
       const o = this.options
+      this.errors = []
       if (o.db_title.length > 40 || o.db_title.length < 3)
         this.errors.push('Nazwa bazy danych powinna mieć od 3 do 40 znaków!')
 
