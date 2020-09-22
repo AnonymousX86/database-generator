@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_POST[''])) {
     $nameMan = file_get_contents("../data/nameMan.json");
     $nameMan = json_decode($nameMan);
