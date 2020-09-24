@@ -66,7 +66,7 @@
                 minlength="3"
                 maxlength="40"
                 v-model="options.db_title"
-                :disabled="selectedPredefined"
+                :readonly="selectedPredefined"
                 required
             />
           </b-col>
@@ -86,7 +86,7 @@
                 min="1"
                 max="3"
                 v-model.number="options.db_tables_count"
-                :disabled="selectedPredefined"
+                :readonly="selectedPredefined"
                 required
             />
           </b-col>
