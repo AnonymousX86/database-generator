@@ -4,8 +4,7 @@
 
 ## Purpose
 
-Web application should generate `.sql` files with database creation script or work on existing MySQL/MariaDB 
-(for example XAMPP MariaDB server) database server.
+Web application should generate `.sql` files with database creation script.
 
 See simple docs below.
 
