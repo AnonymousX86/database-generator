@@ -82,6 +82,6 @@ Please follow these steps:
 1. Install `node.js` from <https://nodejs.org/en/>.
 2. Download code.
 3. Run `npm run build` in project root directory.
-4. Copy `dist` folder to the web server. *(optional)*
+4. Copy `dist` folder to the web server.
 5. Open any web browser and access `dist` folder.
 
