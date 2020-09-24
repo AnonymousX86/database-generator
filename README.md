@@ -1,6 +1,6 @@
 # Database generator
 
-###### (alpha version)
+###### (in-dev version)
 
 ## Purpose
 
