@@ -1,30 +1,47 @@
 <template>
   <b-row>
     <b-col
-        xl="6" offset-xl="3"
-        lg="8" offset-lg="2"
-        md="10" offset-md="1"
-        class="text-left bg-light p-4 rounded mx-4 mx-md-auto">
+      xl="6"
+      offset-xl="3"
+      lg="8"
+      offset-lg="2"
+      md="10"
+      offset-md="1"
+      class="text-left bg-light p-4 rounded mx-4 mx-md-auto"
+    >
       <!--suppress HtmlUnknownTarget -->
-      <form action="action.php" method="post" @submit="onSubmit" @reset.prevent="onReset">
+      <form
+        action="action.php"
+        method="post"
+        @submit="onSubmit"
+        @reset.prevent="onReset"
+      >
         <b-row>
-          <h1>Generator baz danych <a
+          <h1>
+            Generator baz danych
+            <a
               href="https://github.com/AnonymousX86/database-generator"
               target="_blank"
               rel="noopener"
               title="GitHub"
-            ><b-icon icon="link45deg" class="h3"
-            /></a></h1>
+            >
+              <b-icon icon="link45deg" class="h3" />
+            </a>
+          </h1>
         </b-row>
 
         <b-row>
           <b-col cols="6">
-            <label for="predefined">
-              Ustawienia predefiniowane
-            </label>
+            <label for="predefined"> Ustawienia predefiniowane </label>
           </b-col>
           <b-col cols="6">
-            <select name="predefined" id="predefined" v-model="options.scheme" required @change="updateValues">
+            <select
+              name="predefined"
+              id="predefined"
+              v-model="options.scheme"
+              required
+              @change="updateValues"
+            >
               <option value="none" selected>Brak</option>
               <option value="pre-students-marks">Uczniowie i oceny</option>
             </select>
@@ -33,20 +50,18 @@
 
         <b-row>
           <b-col cols="6">
-            <label for="db_rows">
-              Liczba wierszy
-            </label>
+            <label for="db_rows"> Liczba wierszy </label>
           </b-col>
           <b-col cols="6">
             <input
-                type="range"
-                name="db_rows"
-                id="db_rows"
-                v-model.number="options.db_rows"
-                min="100"
-                max="10000"
-                step="100"
-                required
+              type="range"
+              name="db_rows"
+              id="db_rows"
+              v-model.number="options.db_rows"
+              min="100"
+              max="10000"
+              step="100"
+              required
             />
             <span>{{ options.db_rows }}</span>
           </b-col>
@@ -54,47 +69,130 @@
 
         <b-row>
           <b-col cols="6">
-            <label for="db_name">
-              Nazwa bazy danych
-            </label>
+            <label for="db_name"> Nazwa bazy danych </label>
           </b-col>
           <b-col cols="6">
             <input
-                type="text"
-                id="db_name"
-                name="db_name"
-                minlength="3"
-                maxlength="40"
-                v-model="options.db_title"
-                :readonly="selectedPredefined"
-                required
+              type="text"
+              id="db_name"
+              name="db_name"
+              minlength="3"
+              maxlength="40"
+              v-model="options.db_name"
+              :readonly="selectedPredefined"
+              required
             />
           </b-col>
         </b-row>
 
         <b-row>
           <b-col cols="6">
-            <label for="db_tables_count">
-              Liczba tabel
-            </label>
+            <label for="db_tables_count"> Liczba tabel </label>
           </b-col>
           <b-col cols="6">
             <input
-                type="number"
-                name="db_tables_count"
-                id="db_tables_count"
-                min="1"
-                max="3"
-                v-model.number="options.db_tables_count"
-                :readonly="selectedPredefined"
-                required
+              type="number"
+              name="db_tables_count"
+              id="db_tables_count"
+              min="1"
+              max="3"
+              v-model.number="options.db_tables_count"
+              :readonly="selectedPredefined"
+              required
             />
+          </b-col>
+        </b-row>
+
+        <b-row v-for="index in this.options.db_tables_count" :key="index">
+          <b-col cols="12">
+            <h2>Szablon {{ index }}. tabeli</h2>
+            <details open>
+              <b-row>
+                <b-col cols="6">
+                  <label :for="'tables[' + (index - 1) + '][title]'"
+                    >Tytuł</label
+                  >
+                </b-col>
+                <b-col cols="6">
+                  <!--suppress HtmlFormInputWithoutLabel -->
+                  <input
+                    :id="'tables[' + (index - 1) + '][title]'"
+                    v-model="options.db_tables[index - 1].title"
+                    type="text"
+                    minlength="3"
+                    maxlength="40"
+                    required
+                  />
+                </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col cols="6">
+                  <label :for="'tables[' + (index - 1) + '][cols_count]'"
+                    >Liczba kolumn</label
+                  >
+                </b-col>
+                <b-col cols="6">
+                  <!--suppress HtmlFormInputWithoutLabel -->
+                  <input
+                    :id="'tables[' + (index - 1) + '][cols_count]'"
+                    type="number"
+                    v-model.number="options.db_tables[index - 1].cols_count"
+                    min="2"
+                    max="4"
+                    required
+                  />
+                  <!-- TODO ustawić min/max w JS -->
+                </b-col>
+                <b-col cols="12">
+                  <b-row
+                    v-for="i in options.db_tables[index - 1].cols_count"
+                    :key="i"
+                  >
+                    <b-col cols="6">
+                      <label
+                        :for="
+                          'tables[' + (index - 1) + '][' + (i - 1) + '][type]'
+                        "
+                        >{{ i }}. Typ danych</label
+                      >
+                    </b-col>
+                    <b-col cols="6">
+                      <!--suppress HtmlFormInputWithoutLabel -->
+                      <select
+                        :name="
+                          'tables[' + (index - 1) + '][' + (i - 1) + '][type]'
+                        "
+                        :id="
+                          'tables[' + (index - 1) + '][' + (i - 1) + '][type]'
+                        "
+                        v-model="
+                          options.db_tables[index - 1].cols[i - 1].scheme
+                        "
+                        required
+                      >
+                        <option value="id">ID</option>
+                        <option value="name">Imię</option>
+                        <option value="surname">Nazwisko</option>
+                      </select>
+                    </b-col>
+                  </b-row>
+                </b-col>
+              </b-row>
+            </details>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col cols="12">
-            <b-alert v-for="(error, index) of errors" :key="index" variant="danger" :show="true" dismissible fade>
+            <b-alert
+              v-for="(error, index) of errors"
+              :key="index"
+              variant="danger"
+              :show="true"
+              dismissible
+              fade
+            >
               {{ error }}
             </b-alert>
           </b-col>
@@ -119,33 +217,30 @@
 
 <script>
 export default {
-  name: "MainForm",
+  name: 'MainForm',
   data() {
     return {
       options: this.defaultOptions(),
       predefined: {
-        none: {
-          db_title: '',
-          db_tables_count: 1,
-        },
+        none: this.defaultOptions(),
         'pre-students-marks': {
-          db_title: 'uczniowie_oceny',
-          db_tables_count: 3,
-        },
+          db_name: 'uczniowie_oceny',
+          db_tables_count: 3
+        }
       },
-      errors: [],
+      errors: []
     }
   },
   computed: {
     selectedPredefined() {
       return this.options.scheme.startsWith('pre-')
-    },
+    }
   },
   methods: {
     onSubmit(e) {
       const o = this.options
       this.errors = []
-      if (o.db_title.length > 40 || o.db_title.length < 3)
+      if (o.db_name.length > 40 || o.db_name.length < 3)
         this.errors.push('Nazwa bazy danych powinna mieć od 3 do 40 znaków!')
 
       if (o.db_tables_count < 1 || o.db_tables_count > 3)
@@ -163,18 +258,32 @@ export default {
     },
     updateValues() {
       let options = this.options
-      options.db_title = this.predefinedValue('db_title')
+      options.db_name = this.predefinedValue('db_name')
       options.db_tables_count = this.predefinedValue('db_tables_count')
       this.options = options
     },
     defaultOptions() {
-      return {
+      const data = {
         scheme: 'none',
         db_rows: 5000,
-        db_title: '',
+        db_name: '',
         db_tables_count: 1,
+        db_tables: []
       }
-    },
+      for (let i = 0; i < 3; i++) {
+        const n_data = {
+          title: '',
+          cols_count: 2,
+          cols: []
+        }
+        for (let j = 0; j < 4; j++)
+          n_data.cols.push({
+            scheme: ''
+          })
+        data.db_tables.push(n_data)
+      }
+      return data
+    }
   }
 }
 </script>
@@ -183,9 +292,10 @@ export default {
 label {
   display: block;
 }
+
 form {
   .row {
-    border-bottom: solid gray 1px;
+    //border-bottom: solid gray 1px;
     margin: 10px 0;
     padding: 15px 0;
   }
