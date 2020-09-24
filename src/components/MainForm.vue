@@ -294,7 +294,7 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    onSubmit(form) {
       const o = this.options
       const l = this.limits
       this.errors = []
@@ -367,7 +367,7 @@ export default {
 
       if (!this.errors.length) return true
 
-      e.preventDefault()
+      form.preventDefault()
     },
     onReset() {
       this.options = this.defaultOptions()
