@@ -58,8 +58,8 @@
               name="db_rows"
               id="db_rows"
               v-model.number="options.db_rows"
-              min="100"
-              max="10000"
+              :min="limits.db_rows.min"
+              :max="limits.db_rows.min"
               step="100"
               required
             />
@@ -76,8 +76,8 @@
               type="text"
               id="db_name"
               name="db_name"
-              minlength="3"
-              maxlength="40"
+              :minlength="limits.db_name.minlength"
+              :maxlength="limits.db_name.maxlength"
               v-model="options.db_name"
               :readonly="selectedPredefined"
               required
@@ -94,8 +94,8 @@
               type="number"
               name="db_tables_count"
               id="db_tables_count"
-              min="1"
-              max="3"
+              :min="limits.db_tables_count.min"
+              :max="limits.db_tables_count.max"
               v-model.number="options.db_tables_count"
               :readonly="selectedPredefined"
               required
@@ -119,8 +119,8 @@
                     :id="'tables[' + (index - 1) + '][title]'"
                     v-model="options.db_tables[index - 1].title"
                     type="text"
-                    minlength="3"
-                    maxlength="40"
+                    :minlength="limits.db_tables_title.minlength"
+                    :maxlength="limits.db_tables_title.maxlength"
                     required
                   />
                 </b-col>
@@ -138,11 +138,10 @@
                     :id="'tables[' + (index - 1) + '][cols_count]'"
                     type="number"
                     v-model.number="options.db_tables[index - 1].cols_count"
-                    min="2"
-                    max="4"
+                    :min="limits.db_tables_cols_count.min"
+                    :max="limits.db_tables_cols_count.max"
                     required
                   />
-                  <!-- TODO ustawić min/max w JS -->
                 </b-col>
                 <b-col cols="12">
                   <b-row
@@ -228,6 +227,28 @@ export default {
           db_tables_count: 3
         }
       },
+      limits: {
+        db_rows: {
+          min: 100,
+          max: 10000
+        },
+        db_name: {
+          minlength: 3,
+          maxlength: 40
+        },
+        db_tables_count: {
+          min: 1,
+          max: 3
+        },
+        db_tables_title: {
+          minlength: 3,
+          maxlength: 40
+        },
+        db_tables_cols_count: {
+          min: 2,
+          max: 4
+        }
+      },
       errors: []
     }
   },
@@ -239,6 +260,7 @@ export default {
   methods: {
     onSubmit(e) {
       const o = this.options
+      const l = this.limits
       this.errors = []
       if (o.db_name.length > 40 || o.db_name.length < 3)
         this.errors.push('Nazwa bazy danych powinna mieć od 3 do 40 znaków!')
