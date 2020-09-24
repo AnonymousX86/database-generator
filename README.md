@@ -55,10 +55,10 @@ Form uses client-side validation. So server-side validation is optional.
 
 ### Predefined databases
 
-| predefined      | students-marks  |
-| :-------------- | :-------------- |
-| db_name         | uczniowie_oceny |
-| db_tables_count | 3               |
+| `predefined`      | `students-marks`  |
+| :---------------- | :---------------- |
+| `db_name`         | `uczniowie_oceny` |
+| `db_tables_count` | `3`               |
 
 `db_rows` is never predefined.
 
