@@ -262,11 +262,72 @@ export default {
       const o = this.options
       const l = this.limits
       this.errors = []
-      if (o.db_name.length > 40 || o.db_name.length < 3)
-        this.errors.push('Nazwa bazy danych powinna mieć od 3 do 40 znaków!')
 
-      if (o.db_tables_count < 1 || o.db_tables_count > 3)
-        this.errors.push('Liczba tabel powinna być z przedziału od 1 do 3!')
+      if (o.db_rows < l.db_rows.min || o.db_rows > l.db_rows.max)
+        this.addError(
+          'Liczba wierszy powinna być z przedziału od ' +
+            l.db_rows.min +
+            ' do ' +
+            l.db_rows.max +
+            '!'
+        )
+
+      if (
+        o.db_name.length < l.db_name.minlength ||
+        o.db_name.length > l.db_name.maxlength
+      )
+        this.addError(
+          'Nazwa bazy danych powinna mieć od ' +
+            l.db_name.minlength +
+            ' do ' +
+            l.db_name.maxlength +
+            ' znaków!'
+        )
+
+      if (
+        o.db_tables_count < o.db_tables_count.min ||
+        o.db_tables_count > o.db_tables_count.max
+      )
+        this.addError(
+          'Liczba tabel powinna być z przedziału od ' +
+            o.db_tables_count.min +
+            ' do ' +
+            o.db_tables_count.max +
+            '!'
+        )
+
+      for (const table of o.db_tables) {
+        if (
+          table.title.length < l.db_tables_title.minlength ||
+          table.title.length > l.db_tables_title.maxlength
+        ) {
+          this.addError(
+            'Długość nazwa tabeli powinna być z przedziału od ' +
+              l.db_tables_title.minlength +
+              ' do ' +
+              l.db_tables_title.maxlength +
+              '!'
+          )
+          break
+        }
+        /*
+        Both if statements should be checked,
+        but it will be more complicated than necessary.
+        */
+        if (
+          table.cols_count < l.db_tables_cols_count.min ||
+          table.cols_count > l.db_tables_cols_count.max
+        ) {
+          this.addError(
+            'Ilość kolumn w tabeli powinna być z przedziału od ' +
+              l.db_tables_cols_count.min +
+              ' do ' +
+              l.db_tables_cols_count.max +
+              '!'
+          )
+          break
+        }
+      }
 
       if (!this.errors.length) return true
 
@@ -305,6 +366,9 @@ export default {
         data.db_tables.push(n_data)
       }
       return data
+    },
+    addError(text = null) {
+      this.errors.push(text || 'Wystąpił błąd!')
     }
   }
 }
