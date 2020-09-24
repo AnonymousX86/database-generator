@@ -36,18 +36,18 @@ Form uses client-side validation. So server-side validation is optional.
   "tables": {
     "0": {
       "title": "1st table title",
-      "cols_count": 3, /* 1st table columns count */
+      "cols_count": 3, // 1st table columns count
       "0": {
-        "scheme": "id" /* 1st column scheme */
+        "scheme": "id" // 1st column scheme
       },
       "1": {
-        "scheme": "name" /* 2nd column scheme */
+        "scheme": "name" // 2nd column scheme
       },
     },
     "1": {
       "title": "2nd table title",
-      "cols_count": 2, /* 2nd table columns count */
-      "0": {} /* same as above */
+      "cols_count": 2, // 2nd table columns count
+      "0": {} // same as above
     }
   }
 }
