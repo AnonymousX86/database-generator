@@ -62,6 +62,7 @@
             <input
                 type="text"
                 id="db_name"
+                name="db_name"
                 minlength="3"
                 maxlength="40"
                 v-model="options.db_title"
