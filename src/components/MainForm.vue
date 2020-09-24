@@ -59,7 +59,7 @@
               id="db_rows"
               v-model.number="options.db_rows"
               :min="limits.db_rows.min"
-              :max="limits.db_rows.min"
+              :max="limits.db_rows.max"
               step="100"
               required
             />
