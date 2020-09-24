@@ -10,16 +10,21 @@ See simple docs below.
 
 ## JS to PHP communication
 
-These are variables accessible via `$_POST[]` array.
-
-| Variable name   | Description                           | About value(s)             |
-| :-------------- | :------------------------------------ | :------------------------- |
-| predefined      | One from predefined database schemes. |`none` means custom scheme. |
-| db_rows         | Rows to generate per table.           | 100 - 10 000.              |
-| db_name         | Database name.                        | 3 - 40 characters.         |
-| db_tables_count | Number of tables to generate.         | 1 - 3.                     |
+These are variables accessible via `$_POST` array.
 
 Form uses client-side validation. So server-side validation is optional.
+
+### Table
+
+| Variable name           | Description                           | About value(s)              |
+| :---------------------- | :------------------------------------ | :-------------------------- |
+| `predefined`            | One from predefined database schemes. |`none` means custom scheme.  |
+| `db_rows`               | Rows to generate per table.           | 100 - 10 000.               |
+| `db_name`               | Database name.                        | 3 - 40 characters.          |
+| `db_tables_count`       | Number of tables to generate.         | 1 - 3.                      |
+| `tables[x][title]`      | X table's title.                      | 3 - 40 characters.          |
+| `tables[x][cols_count]` | X table's columns count.              | 2 - 4.                      |
+| `tables[x][y][scheme]`  | X table's Y column's scheme.          | See columns' schemes below. |
 
 ### Predefined databases
 
