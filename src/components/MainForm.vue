@@ -7,7 +7,7 @@
       offset-lg="2"
       md="10"
       offset-md="1"
-      class="text-left bg-light p-4 rounded mx-4 mx-md-auto"
+      class="text-left bg-light p-4 rounded mx-1 mx-md-auto"
     >
       <header>
         <b-row class="my-0">
@@ -18,6 +18,7 @@
               target="_blank"
               rel="noopener"
               title="GitHub"
+              class="d-none d-sm-inline"
             >
               <b-icon icon="link45deg" class="h3" />
             </a>
@@ -34,11 +35,11 @@
           @reset.prevent="onReset"
         >
           <!-- Predefined -->
-          <b-row>
-            <b-col cols="6">
-              <label for="predefined"> Ustawienia predefiniowane </label>
+          <b-row class="text-center text-sm-left">
+            <b-col sm="6">
+              <label for="predefined">Ustawienia predefiniowane</label>
             </b-col>
-            <b-col cols="6">
+            <b-col sm="6">
               <select
                 name="predefined"
                 id="predefined"
@@ -53,11 +54,11 @@
           </b-row>
 
           <!-- Rows count -->
-          <b-row>
-            <b-col cols="6">
-              <label for="db_rows"> Liczba wierszy </label>
+          <b-row class="text-center text-sm-left">
+            <b-col sm="6">
+              <label for="db_rows">Liczba wierszy</label>
             </b-col>
-            <b-col cols="6">
+            <b-col sm="6">
               <input
                 type="range"
                 name="db_rows"
@@ -68,16 +69,16 @@
                 step="100"
                 required
               />
-              <span>{{ options.db_rows }}</span>
+              <span class="d-inline-block ml-2">{{ options.db_rows }}</span>
             </b-col>
           </b-row>
 
           <!-- Database name -->
-          <b-row>
-            <b-col cols="6">
-              <label for="db_name"> Nazwa bazy danych </label>
+          <b-row class="text-center text-sm-left">
+            <b-col sm="6">
+              <label for="db_name">Nazwa bazy danych</label>
             </b-col>
-            <b-col cols="6">
+            <b-col sm="6">
               <input
                 type="text"
                 id="db_name"
@@ -92,11 +93,11 @@
           </b-row>
 
           <!-- Tables count -->
-          <b-row>
-            <b-col cols="6">
-              <label for="db_tables_count"> Liczba tabel </label>
+          <b-row class="text-center text-sm-left">
+            <b-col sm="6">
+              <label for="db_tables_count">Liczba tabel</label>
             </b-col>
-            <b-col cols="6">
+            <b-col sm="6">
               <input
                 type="number"
                 name="db_tables_count"
@@ -118,13 +119,13 @@
                 <details open>
                   <summary>Opcje</summary>
                   <!-- Title -->
-                  <b-row>
-                    <b-col cols="6">
+                  <b-row class="text-center text-sm-left">
+                    <b-col sm="6">
                       <label :for="'tables[' + (index - 1) + '][title]'"
                         >Tytuł</label
                       >
                     </b-col>
-                    <b-col cols="6">
+                    <b-col sm="6">
                       <!--suppress HtmlFormInputWithoutLabel -->
                       <input
                         :id="'tables[' + (index - 1) + '][title]'"
@@ -138,13 +139,13 @@
                   </b-row>
 
                   <!-- Columns count and types -->
-                  <b-row>
-                    <b-col cols="6">
+                  <b-row class="text-center text-sm-left">
+                    <b-col sm="6">
                       <label :for="'tables[' + (index - 1) + '][cols_count]'"
                         >Liczba kolumn</label
                       >
                     </b-col>
-                    <b-col cols="6">
+                    <b-col sm="6">
                       <!--suppress HtmlFormInputWithoutLabel -->
                       <input
                         :id="'tables[' + (index - 1) + '][cols_count]'"
@@ -160,8 +161,9 @@
                         <b-row
                           v-for="i in options.db_tables[index - 1].cols_count"
                           :key="i"
+                          class="text-center text-sm-left"
                         >
-                          <b-col cols="6">
+                          <b-col sm="6">
                             <label
                               :for="
                                 'tables[' +
@@ -173,7 +175,7 @@
                               >{{ i }}. Typ danych</label
                             >
                           </b-col>
-                          <b-col cols="6">
+                          <b-col sm="6">
                             <!--suppress HtmlFormInputWithoutLabel -->
                             <select
                               :name="
@@ -211,7 +213,7 @@
 
           <!-- Alerts + buttons -->
           <b-row>
-            <b-col cols="12">
+            <b-col cols="12" class="mb-3">
               <b-alert
                 v-for="(error, index) of errors"
                 :key="index"
@@ -223,14 +225,18 @@
                 {{ error }}
               </b-alert>
             </b-col>
-            <b-col cols="6">
-              <input id="submit" type="submit" class="btn btn-primary w-100" />
+            <b-col md="6" class="mb-3">
+              <input
+                id="submit"
+                type="submit"
+                class="btn btn-primary py-2 w-100"
+              />
             </b-col>
-            <b-col cols="6">
+            <b-col md="6">
               <input
                 id="reset"
                 type="reset"
-                class="btn btn-warning px-5 w-100"
+                class="btn btn-warning py-2 w-100"
               />
             </b-col>
           </b-row>
@@ -332,13 +338,15 @@ export default {
             '!'
         )
 
-      for (const table of o.db_tables) {
+      for (let i = 0; i < o.db_tables_count; i++) {
         if (
-          table.title.length < l.db_tables_title.minlength ||
-          table.title.length > l.db_tables_title.maxlength
+          o.db_tables[i].title.length < l.db_tables_title.minlength ||
+          o.db_tables[i].title.length > l.db_tables_title.maxlength
         ) {
           this.addError(
-            'Długość nazwa tabeli powinna być z przedziału od ' +
+            'Długość ' +
+              (i + 1) +
+              ' nazwy tabeli powinna być z przedziału od ' +
               l.db_tables_title.minlength +
               ' do ' +
               l.db_tables_title.maxlength +
@@ -351,8 +359,8 @@ export default {
         but it will be more complicated than necessary.
         */
         if (
-          table.cols_count < l.db_tables_cols_count.min ||
-          table.cols_count > l.db_tables_cols_count.max
+          o.db_tables[i].cols_count < l.db_tables_cols_count.min ||
+          o.db_tables[i].cols_count > l.db_tables_cols_count.max
         ) {
           this.addError(
             'Ilość kolumn w tabeli powinna być z przedziału od ' +
