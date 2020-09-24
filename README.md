@@ -26,6 +26,33 @@ Form uses client-side validation. So server-side validation is optional.
 | `tables[x][cols_count]` | X table's columns count.              | 2 - 4.                      |
 | `tables[x][y][scheme]`  | X table's Y column's scheme.          | See columns' schemes below. |
 
+### JSON representation
+```json
+{
+  "predefined": "predefined scheme name",
+  "db_rows": 5000,
+  "db_name": "database name",
+  "db_tables_count": 3,
+  "tables": {
+    "0": {
+      "title": "1st table title",
+      "cols_count": 3, /* 1st table columns count */
+      "0": {
+        "scheme": "id" /* 1st column scheme */
+      },
+      "1": {
+        "scheme": "name" /* 2nd column scheme */
+      },
+    },
+    "1": {
+      "title": "2nd table title",
+      "cols_count": 2, /* 2nd table columns count */
+      "0": {} /* same as above */
+    }
+  }
+}
+```
+
 ### Predefined databases
 
 | predefined      | students-marks  |
