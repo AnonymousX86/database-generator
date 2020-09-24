@@ -368,7 +368,7 @@ export default {
       return data
     },
     addError(text = null) {
-      this.errors.push(text || 'Wystąpił błąd!')
+      this.errors.push(text || 'Wystąpił nieokreślony błąd!')
     }
   }
 }
