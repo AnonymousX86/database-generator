@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <b-container :fluid="true" class="mt-4">
+    <b-container :fluid="true" class="my-4">
       <MainForm />
     </b-container>
   </div>
 </template>
 
 <script>
-import MainForm from "@/components/MainForm";
+import MainForm from '@/components/MainForm'
 export default {
   name: 'App',
-  components: {MainForm},
+  components: { MainForm }
 }
 </script>
 
