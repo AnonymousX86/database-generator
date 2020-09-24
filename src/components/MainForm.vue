@@ -204,7 +204,13 @@
         </b-row>
 
         <b-row class="border-bottom-0">
-          Wykonane przez: Bartosz Roguś i Jakub Suchenek.
+          <b-col>
+            <footer>
+              Wykonane przez uczniów
+              <strong class="pr-1">Bartosz&nbsp;Roguś</strong
+              >i&nbsp;<strong>Jakub&nbsp;Suchenek</strong>.
+            </footer>
+          </b-col>
         </b-row>
       </form>
     </b-col>
@@ -385,5 +391,10 @@ form {
     margin: 10px 0;
     padding: 15px 0;
   }
+}
+
+strong {
+  display: inline-block;
+  margin: 0;
 }
 </style>
