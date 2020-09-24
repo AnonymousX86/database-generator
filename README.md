@@ -62,6 +62,17 @@ Form uses client-side validation. So server-side validation is optional.
 
 `db_rows` is never predefined.
 
+
+### Columns' schemes
+
+| `tables[x][y][scheme]` | Field type    | Additional info              |
+| :--------------------- | :------------ | :--------------------------- |
+| `id`                   | `INT`         | `PRIMARY KEY AUTO INCREMENT` |
+| `name`                 | `VARCHAR(40)` | `NOT NULL`                   |
+| `surname`              | `VARCHAR(40)` | `NOT NULL`                   |
+
+This data is not included in `POST`.
+
 ## How to use
 
 **Important!** Project uses JS and PHP, so to use this generator you have to use PHP interpreter.
