@@ -246,7 +246,7 @@
 
       <footer>
         <b-row class="border-bottom-0">
-          <b-col>
+          <b-col class="text-center">
             Wykonane przez uczniów
             <strong class="pr-1">Bartosz&nbsp;Roguś</strong
             >i&nbsp;<strong>Jakub&nbsp;Suchenek</strong>.
