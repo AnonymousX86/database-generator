@@ -25,6 +25,7 @@ Form uses client-side validation. So server-side validation is optional.
 | `tables[x][title]`      | X table's title.                      | 3 - 40 characters.          |
 | `tables[x][cols_count]` | X table's columns count.              | 2 - 4.                      |
 | `tables[x][y][scheme]`  | X table's Y column's scheme.          | See columns' schemes below. |
+| `tables[x][y][title]`   | X table's Y column's title.           | As above.                   |
 
 ### JSON representation
 ```json
@@ -36,18 +37,27 @@ Form uses client-side validation. So server-side validation is optional.
   "tables": {
     "0": {
       "title": "1st table title",
-      "cols_count": 3,
+      "cols_count": 2,
       "0": {
-        "scheme": "id"
+        "scheme": "id",
+        "title": "some id"
       },
       "1": {
-        "scheme": "name"
+        "scheme": "name",
+        "tile": "just a name"
       },
     },
     "1": {
       "title": "2nd table title",
       "cols_count": 2,
-      "0": {}
+      "0": {
+       "scheme": "surname",
+       "tile": "last name i think"
+     },
+      "1": {
+        "scheme": "pesel",
+        "tile": "unique number"
+      },
     }
   }
 }
