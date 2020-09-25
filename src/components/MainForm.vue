@@ -129,6 +129,7 @@
                       <!--suppress HtmlFormInputWithoutLabel -->
                       <input
                         :id="'tables[' + (index - 1) + '][title]'"
+                        :name="'tables[' + (index - 1) + '][title]'"
                         v-model="options.db_tables[index - 1].title"
                         type="text"
                         :minlength="limits.db_tables_title.minlength"
