@@ -465,7 +465,6 @@ strong {
 
 .v-enter,
 .v-leave-to {
-  margin-bottom: -50%;
   opacity: 0;
 }
 </style>
