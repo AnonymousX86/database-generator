@@ -198,9 +198,13 @@
                               "
                               required
                             >
-                              <option value="id">ID</option>
-                              <option value="name">Imię</option>
-                              <option value="surname">Nazwisko</option>
+                              <option
+                                v-for="(column, index) of columnsSchemes"
+                                :key="index"
+                                :value="column.id"
+                              >
+                                {{ column.hid }}
+                              </option>
                             </select>
                           </b-col>
                         </b-row>
