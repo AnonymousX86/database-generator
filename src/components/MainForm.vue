@@ -263,14 +263,24 @@ export default {
   data() {
     return {
       options: this.defaultOptions(),
-      predefined: {
-        none: this.defaultOptions(),
+      errors: []
+    }
+  },
+  computed: {
+    selectedPredefined() {
+      return this.options.scheme.startsWith('pre-')
+    },
+    predefined() {
+      return {
+        none: this.defaultOptions,
         'pre-students-marks': {
           db_name: 'uczniowie_oceny',
           db_tables_count: 3
         }
-      },
-      limits: {
+      }
+    },
+    limits() {
+      return {
         db_rows: {
           min: 100,
           max: 10000
@@ -291,13 +301,8 @@ export default {
           min: 2,
           max: 4
         }
-      },
-      errors: []
-    }
-  },
-  computed: {
-    selectedPredefined() {
-      return this.options.scheme.startsWith('pre-')
+      }
+    },
     }
   },
   methods: {
@@ -379,7 +384,7 @@ export default {
       form.preventDefault()
     },
     onReset() {
-      this.options = this.defaultOptions()
+      this.options = this.defaultOptions
     },
     predefinedValue(attribute) {
       return this.predefined[this.options.scheme][attribute]
