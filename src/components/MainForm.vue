@@ -419,6 +419,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1,
+h2 {
+  width: 100%;
+  border-bottom: solid #b0b0b0 1px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
 label {
   display: block;
 }
