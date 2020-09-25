@@ -159,55 +159,68 @@
                     </b-col>
                     <b-col cols="12">
                       <transition-group tag="div">
-                        <b-row
+                        <div
                           v-for="i in options.db_tables[index - 1].cols_count"
                           :key="i"
                           class="text-center text-sm-left"
                         >
-                          <b-col sm="6">
-                            <label
-                              :for="
-                                'tables[' +
-                                  (index - 1) +
-                                  '][' +
-                                  (i - 1) +
-                                  '][type]'
-                              "
-                              >{{ i }}. Typ danych</label
-                            >
-                          </b-col>
-                          <b-col sm="6">
-                            <!--suppress HtmlFormInputWithoutLabel -->
-                            <select
-                              :name="
-                                'tables[' +
-                                  (index - 1) +
-                                  '][' +
-                                  (i - 1) +
-                                  '][type]'
-                              "
-                              :id="
-                                'tables[' +
-                                  (index - 1) +
-                                  '][' +
-                                  (i - 1) +
-                                  '][type]'
-                              "
-                              v-model="
-                                options.db_tables[index - 1].cols[i - 1].scheme
-                              "
-                              required
-                            >
-                              <option
-                                v-for="(column, index) of columnsSchemes"
-                                :key="index"
-                                :value="column.id"
+                          <b-row>
+                            <b-col sm="6">
+                              <label
+                                :for="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][type]'
+                                "
+                                >{{ i }}. Typ danych</label
                               >
-                                {{ column.hid }}
-                              </option>
-                            </select>
-                          </b-col>
-                        </b-row>
+                            </b-col>
+                            <b-col sm="6">
+                              <!--suppress HtmlFormInputWithoutLabel -->
+                              <select
+                                :name="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][scheme]'
+                                "
+                                :id="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][scheme]'
+                                "
+                                v-model="
+                                  options.db_tables[index - 1].cols[i - 1]
+                                    .scheme
+                                "
+                                required
+                              >
+                                <option v-if="i === 1" value="id">ID</option>
+                                <option
+                                  v-for="(column, index) of columnsSchemes"
+                                  :key="index"
+                                  :value="column.id"
+                                >
+                                  {{ column.hid }}
+                                </option>
+                              </select>
+                              <label class="mt-1">
+                                <input
+                                  type="text"
+                                  v-model="
+                                    options.db_tables[index - 1].cols[i - 1]
+                                      .title
+                                  "
+                                />
+                              </label>
+                            </b-col>
+                          </b-row>
+                        </div>
                       </transition-group>
                     </b-col>
                   </b-row>
@@ -307,6 +320,33 @@ export default {
         }
       }
     },
+    columnsSchemes() {
+      return [
+        {
+          id: 'name',
+          hid: 'Imię'
+        },
+        {
+          id: 'surname',
+          hid: 'Nazwisko'
+        },
+        {
+          id: 'gender',
+          hid: 'Płeć'
+        },
+        {
+          id: 'pesel',
+          hid: 'PESEL'
+        },
+        {
+          id: 'class',
+          hid: 'Klasa'
+        },
+        {
+          id: 'birthday',
+          hid: 'Data urodzenia'
+        }
+      ]
     }
   },
   methods: {
@@ -415,7 +455,8 @@ export default {
         }
         for (let j = 0; j < 4; j++)
           n_data.cols.push({
-            scheme: ''
+            scheme: j === 0 ? 'id' : '',
+            title: ''
           })
         data.db_tables.push(n_data)
       }
