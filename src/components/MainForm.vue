@@ -212,6 +212,13 @@
                               <label class="mt-1">
                                 <input
                                   type="text"
+                                  :name="
+                                    'tables[' +
+                                      (index - 1) +
+                                      '][' +
+                                      (i - 1) +
+                                      '][title]'
+                                  "
                                   v-model="
                                     options.db_tables[index - 1].cols[i - 1]
                                       .title
