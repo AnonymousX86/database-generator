@@ -129,6 +129,7 @@
                       <!--suppress HtmlFormInputWithoutLabel -->
                       <input
                         :id="'tables[' + (index - 1) + '][title]'"
+                        :name="'tables[' + (index - 1) + '][title]'"
                         v-model="options.db_tables[index - 1].title"
                         type="text"
                         :minlength="limits.db_tables_title.minlength"
@@ -419,6 +420,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1,
+h2 {
+  width: 100%;
+  border-bottom: solid #b0b0b0 1px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
 label {
   display: block;
 }
