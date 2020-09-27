@@ -225,6 +225,7 @@
                                   "
                                 />
                               </label>
+                              <!-- TODO sprawdzanie nazwy wyrażeniem regularnym -->
                               <p class="text-small" title="Zalecana nazwa">
                                 {{
                                   recommendedName(
