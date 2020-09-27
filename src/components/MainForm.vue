@@ -225,6 +225,14 @@
                                   "
                                 />
                               </label>
+                              <p class="text-small" title="Zalecana nazwa">
+                                {{
+                                  recommendedName(
+                                    options.db_tables[index - 1].cols[i - 1]
+                                      .title
+                                  )
+                                }}
+                              </p>
                             </b-col>
                           </b-row>
                         </div>
@@ -471,6 +479,10 @@ export default {
     },
     addError(text = null) {
       this.errors.push(text || 'Wystąpił nieokreślony błąd!')
+    },
+    recommendedName(text) {
+      const notOptimal = text.length && text.includes(' ')
+      return notOptimal ? text.toLowerCase().replaceAll(' ', '_') : ''
     }
   }
 }
@@ -513,6 +525,11 @@ details[open] summary ~ * {
 strong {
   display: inline-block;
   margin: 0;
+}
+
+.text-small {
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .v-enter-active,
