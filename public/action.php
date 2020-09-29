@@ -24,11 +24,12 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
     fwrite($file, 'CREATE DATABASE IF NOT EXISTS `'.$databaseName.'`;'.PHP_EOL); // create database
 
     for($i=0;$i<$tableNumber;$i++){
+        /** @noinspection SqlNoDataSourceInspection */
         fwrite($file, 'CREATE TABLE '.$tables[$i]['title'].PHP_EOL.'('.PHP_EOL); // create X table
         for($j=0;$j<count($tables[$i])-1;$j++){ // for each column
             switch($tables[$i][$j]['scheme']){ // table variables, for each table scheme
                 case "id": // case if id
-                    // TODO przecinki na koncu, rezzta case
+                    // TODO przecinki na końcu, reszta case
                     fwrite($file, $tables[$i][$j]['title'].' INT AUTO_INCREMENT PRIMARY KEY');
                     if($j<count($tables[$i])-1) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
