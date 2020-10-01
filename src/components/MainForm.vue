@@ -8,21 +8,24 @@
       md="10"
       offset-md="1"
       class="text-left bg-light p-4 rounded mx-1 mx-md-auto"
+      style="box-shadow: 3px 3px 10px 2px black"
     >
       <header>
         <b-row class="my-0">
-          <h1>
-            Generator baz danych
-            <a
-              href="https://github.com/AnonymousX86/database-generator"
-              target="_blank"
-              rel="noopener"
-              title="GitHub"
-              class="d-none d-sm-inline"
-            >
-              <b-icon icon="link45deg" class="h3" />
-            </a>
-          </h1>
+          <b-col>
+            <h1>
+              Generator baz danych
+              <a
+                href="https://github.com/AnonymousX86/database-generator"
+                target="_blank"
+                rel="noopener"
+                title="GitHub"
+                class="d-none d-sm-inline"
+              >
+                <b-icon icon="link45deg" class="h3" />
+              </a>
+            </h1>
+          </b-col>
         </b-row>
       </header>
 
@@ -37,7 +40,9 @@
           <!-- Predefined -->
           <b-row class="text-center text-sm-left">
             <b-col sm="6">
-              <label for="predefined">Ustawienia predefiniowane</label>
+              <label for="predefined">
+                Ustawienia predefiniowane
+              </label>
             </b-col>
             <b-col sm="6">
               <select
@@ -334,13 +339,17 @@ export default {
   name: 'MainForm',
   data() {
     return {
-      options: this.defaultOptions(),
+      options: {},
       errors: []
     }
   },
   computed: {
     selectedPredefined() {
-      return this.options.scheme.startsWith('pre-')
+      if (this.options.length) {
+        return this.options.scheme.startsWith('pre-') || false
+      } else {
+        return false
+      }
     },
     predefined() {
       return {
@@ -406,7 +415,7 @@ export default {
         },
         db_tables_cols_count: {
           min: 2,
-          max: 4
+          max: 7
         }
       }
     },
@@ -537,13 +546,13 @@ export default {
         db_tables_count: 1,
         db_tables: []
       }
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < this.limits.db_tables_count.max; i++) {
         const n_data = {
           title: '',
           cols_count: 2,
           cols: []
         }
-        for (let j = 0; j < 4; j++)
+        for (let j = 0; j < this.limits.db_tables_cols_count.max; j++)
           n_data.cols.push({
             scheme: j === 0 ? 'id' : '',
             title: ''
@@ -559,6 +568,9 @@ export default {
       const notOptimal = text.length && text.includes(' ')
       return notOptimal ? text.toLowerCase().replaceAll(' ', '_') : ''
     }
+  },
+  mounted() {
+    this.options = this.defaultOptions()
   }
 }
 </script>
