@@ -336,7 +336,42 @@ export default {
         none: this.defaultOptions,
         'pre-students-marks': {
           db_name: 'uczniowie_oceny',
-          db_tables_count: 3
+          db_tables_count: 2,
+          db_tables: [
+            {
+              title: 'uczniowie',
+              cols_count: 4,
+              cols: [
+                {
+                  scheme: 'id',
+                  title: 'uczen_id'
+                },
+                {
+                  scheme: 'name',
+                  title: 'imie'
+                },
+                {
+                  scheme: 'surname',
+                  title: 'nazwisko'
+                },
+                {
+                  scheme: 'class',
+                  title: 'klasa'
+                }
+              ]
+            },
+            {
+              title: 'oceny',
+              cols_count: 2,
+              cols: [
+                {
+                  scheme: 'id',
+                  title: 'id'
+                }
+                /* TODO uzupełnić dane */
+              ]
+            }
+          ]
         }
       }
     },
