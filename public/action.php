@@ -29,21 +29,28 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
         for($j=0;$j<count($tables[$i])-1;$j++){ // for each column
             switch($tables[$i][$j]['scheme']){ // table variables, for each table scheme
                 case "id": // case if id
-                    // TODO przecinki na końcu, reszta case
-                    fwrite($file, $tables[$i][$j]['title'].' INT AUTO_INCREMENT PRIMARY KEY');
-                    if($j<count($tables[$i])-1) fwrite($file, ','.PHP_EOL); // if not last, write ","
+                    // TODO  reszta case
+                    if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
+                    else fwrite($file, "id");
+                    fwrite($file, ' INT AUTO_INCREMENT PRIMARY KEY');
+                    if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
                     break;
                 case "name": // case if name
-                    fwrite($file, $tables[$i][$j]['title'].' VARCHAR(40) NOT NULL');
-                    if($j<count($tables[$i])-1) fwrite($file, ','.PHP_EOL); // if not last, write ","
+                    if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
+                    else fwrite($file, "imie");
+                    fwrite($file, ' VARCHAR(40) NOT NULL');
+                    if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
                     break;
                 case "surname": // case if surname
-                    fwrite($file, $tables[$i][$j]['title'].' VARCHAR(40) NOT NULL');
-                    if($j<count($tables[$i])-1) fwrite($file, ','.PHP_EOL); // if not last, write ","
+                    if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
+                    else fwrite($file, "nazwisko");
+                    fwrite($file, ' VARCHAR(40) NOT NULL');
+                    if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
                     break;
+                case ""
             }
         }
         fwrite($file, ');'.PHP_EOL);
