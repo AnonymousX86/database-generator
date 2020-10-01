@@ -308,7 +308,7 @@
               <input
                 id="reset"
                 type="reset"
-                class="btn btn-warning py-2 w-100"
+                class="btn btn-danger py-2 w-100"
               />
             </b-col>
           </b-row>
