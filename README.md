@@ -80,6 +80,10 @@ Form uses client-side validation. So server-side validation is optional.
 | `id`                   | `INT`         | `PRIMARY KEY AUTO INCREMENT` |
 | `name`                 | `VARCHAR(40)` | `NOT NULL`                   |
 | `surname`              | `VARCHAR(40)` | `NOT NULL`                   |
+| `gender`               | `VARCHAR(1)`  | `NOT NULL`                   |
+| `pesel`                | `VARCHAR(11)` | `NOT NULL`                   |
+| `class`                | `VARCHAR(4)`  | `NOT NULL`                   |
+| `birthday`             | `DATE`        | `NOT NULL`                   |
 
 This data is not included in `POST`.
 
