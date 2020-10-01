@@ -25,7 +25,7 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
 
     for($i=0;$i<$tableNumber;$i++){
         /** @noinspection SqlNoDataSourceInspection */
-        fwrite($file, 'CREATE TABLE '.$tables[$i]['title'].PHP_EOL.'('.PHP_EOL); // create X table
+        fwrite($file, 'CREATE TABLE `'.$tables[$i]['title'].'`'.PHP_EOL.'('.PHP_EOL); // create X table
         for($j=0;$j<count($tables[$i])-1;$j++){ // for each column
             switch($tables[$i][$j]['scheme']){ // table variables, for each table scheme
                 case "id": // case if id
