@@ -12,18 +12,20 @@
     >
       <header>
         <b-row class="my-0">
-          <h1>
-            Generator baz danych
-            <a
-              href="https://github.com/AnonymousX86/database-generator"
-              target="_blank"
-              rel="noopener"
-              title="GitHub"
-              class="d-none d-sm-inline"
-            >
-              <b-icon icon="link45deg" class="h3" />
-            </a>
-          </h1>
+          <b-col>
+            <h1>
+              Generator baz danych
+              <a
+                href="https://github.com/AnonymousX86/database-generator"
+                target="_blank"
+                rel="noopener"
+                title="GitHub"
+                class="d-none d-sm-inline"
+              >
+                <b-icon icon="link45deg" class="h3" />
+              </a>
+            </h1>
+          </b-col>
         </b-row>
       </header>
 
@@ -38,7 +40,9 @@
           <!-- Predefined -->
           <b-row class="text-center text-sm-left">
             <b-col sm="6">
-              <label for="predefined">Ustawienia predefiniowane</label>
+              <label for="predefined">
+                Ustawienia predefiniowane
+              </label>
             </b-col>
             <b-col sm="6">
               <select
