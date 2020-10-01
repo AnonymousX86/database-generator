@@ -47,8 +47,9 @@
                 required
                 @change="updateValues"
               >
+                <!-- TODO włączyć inne schematy -->
                 <option value="none" selected>Brak</option>
-                <option value="pre-students-marks">Uczniowie i oceny</option>
+                <!--<option value="pre-students-marks">Uczniowie i oceny</option>-->
               </select>
             </b-col>
           </b-row>
@@ -318,6 +319,7 @@
   </b-row>
 </template>
 
+<!--suppress SpellCheckingInspection -->
 <script>
 export default {
   name: 'MainForm',
