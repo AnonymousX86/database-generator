@@ -8,6 +8,7 @@
       md="10"
       offset-md="1"
       class="text-left bg-light p-4 rounded mx-1 mx-md-auto"
+      style="box-shadow: 3px 3px 10px 2px black"
     >
       <header>
         <b-row class="my-0">
