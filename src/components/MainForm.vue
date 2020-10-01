@@ -70,7 +70,16 @@
                 step="100"
                 required
               />
-              <span class="d-inline-block ml-2">{{ options.db_rows }}</span>
+              <label class="d-inline-block ml-1">
+                <input
+                  type="number"
+                  v-model.number="options.db_rows"
+                  :min="limits.db_rows.min"
+                  :max="limits.db_rows.max"
+                  step="100"
+                />
+              </label>
+              <!--<span class="d-inline-block ml-2">{{ options.db_rows }}</span>-->
             </b-col>
           </b-row>
 
