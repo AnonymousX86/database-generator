@@ -339,13 +339,17 @@ export default {
   name: 'MainForm',
   data() {
     return {
-      options: this.defaultOptions(),
+      options: {},
       errors: []
     }
   },
   computed: {
     selectedPredefined() {
-      return this.options.scheme.startsWith('pre-')
+      if (this.options.length) {
+        return this.options.scheme.startsWith('pre-') || false
+      } else {
+        return false
+      }
     },
     predefined() {
       return {
@@ -542,13 +546,13 @@ export default {
         db_tables_count: 1,
         db_tables: []
       }
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < this.limits.db_tables_count.max; i++) {
         const n_data = {
           title: '',
           cols_count: 2,
           cols: []
         }
-        for (let j = 0; j < 4; j++)
+        for (let j = 0; j < this.limits.db_tables_cols_count.max; j++)
           n_data.cols.push({
             scheme: j === 0 ? 'id' : '',
             title: ''
@@ -564,6 +568,9 @@ export default {
       const notOptimal = text.length && text.includes(' ')
       return notOptimal ? text.toLowerCase().replaceAll(' ', '_') : ''
     }
+  },
+  mounted() {
+    this.options = this.defaultOptions()
   }
 }
 </script>
