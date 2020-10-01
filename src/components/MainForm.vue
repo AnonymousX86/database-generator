@@ -335,7 +335,7 @@ export default {
     },
     predefined() {
       return {
-        none: this.defaultOptions,
+        none: this.defaultOptions(),
         'pre-students-marks': {
           db_name: 'uczniowie_oceny',
           db_tables_count: 2,
