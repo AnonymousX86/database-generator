@@ -158,13 +158,14 @@
                       />
                     </b-col>
                     <b-col cols="12">
-                      <transition-group tag="div">
-                        <div
+                      <transition-group tag="ol" class="pl-0" :type="'1'">
+                        <li
                           v-for="i in options.db_tables[index - 1].cols_count"
                           :key="i"
                           class="text-center text-sm-left"
                         >
                           <b-row>
+                            <!-- Typ danych -->
                             <b-col sm="6">
                               <label
                                 :for="
@@ -174,9 +175,11 @@
                                     (i - 1) +
                                     '][type]'
                                 "
-                                >{{ i }}. Typ danych</label
+                                >Typ danych</label
                               >
                             </b-col>
+
+                            <!-- select -->
                             <b-col sm="6">
                               <!--suppress HtmlFormInputWithoutLabel -->
                               <select
@@ -209,22 +212,47 @@
                                   {{ column.hid }}
                                 </option>
                               </select>
-                              <label class="mt-1">
-                                <input
-                                  type="text"
-                                  :name="
-                                    'tables[' +
-                                      (index - 1) +
-                                      '][' +
-                                      (i - 1) +
-                                      '][title]'
-                                  "
-                                  v-model="
-                                    options.db_tables[index - 1].cols[i - 1]
-                                      .title
-                                  "
-                                />
+                            </b-col>
+
+                            <!-- Nazwa kolumny -->
+                            <b-col sm="6">
+                              <label
+                                class="mt-1"
+                                :for="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][title]'
+                                "
+                              >
+                                Nazwa kolumny
                               </label>
+                            </b-col>
+
+                            <!-- input -->
+                            <b-col sm="6">
+                              <!--suppress HtmlFormInputWithoutLabel -->
+                              <input
+                                type="text"
+                                :id="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][title]'
+                                "
+                                :name="
+                                  'tables[' +
+                                    (index - 1) +
+                                    '][' +
+                                    (i - 1) +
+                                    '][title]'
+                                "
+                                v-model="
+                                  options.db_tables[index - 1].cols[i - 1].title
+                                "
+                              />
                               <!-- TODO sprawdzanie nazwy wyrażeniem regularnym -->
                               <p class="text-small" title="Zalecana nazwa">
                                 {{
@@ -236,7 +264,7 @@
                               </p>
                             </b-col>
                           </b-row>
-                        </div>
+                        </li>
                       </transition-group>
                     </b-col>
                   </b-row>
