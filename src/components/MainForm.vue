@@ -411,7 +411,7 @@ export default {
         },
         db_tables_cols_count: {
           min: 2,
-          max: 4
+          max: 7
         }
       }
     },
