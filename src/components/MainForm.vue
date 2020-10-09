@@ -124,6 +124,26 @@
             </b-col>
           </b-row>
 
+          <b-row>
+            <b-col cols="12">
+              <b-alert :show="true" variant="info">
+                <h4>Uwaga!</h4>
+                <!-- klasa -> data -> pesel -->
+                <p>
+                  Pole <code>PESEL</code> jest zależne od
+                  <code>Data urodzenia</code>, a pole
+                  <code>Data urodzenia</code> jest zależne od
+                  <code>Klasa</code>.
+                </p>
+                <p>
+                  Jeżeli chcesz, aby dane były jak najbardziej spójne ze sobą,
+                  ustaw <strong>klasę przed datą</strong>, a
+                  <strong>datę przed peselem</strong>.
+                </p>
+              </b-alert>
+            </b-col>
+          </b-row>
+
           <!-- X table's scheme -->
           <transition-group tag="div">
             <b-row v-for="index in this.options.db_tables_count" :key="index">
