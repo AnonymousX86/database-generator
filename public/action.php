@@ -15,7 +15,8 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
     $tables = $_POST['tables'];
 
     if(!is_dir('sql')) mkdir('sql');
-    $file = fopen('sql/'.date("Y-m-d_H-i-s_").$databaseName.'.sql', 'w+'); // create sql file
+    $fileDirectory = 'sql/'.date("Y-m-d_H-i-s_").$databaseName.'.sql';
+    $file = fopen($fileDirectory, 'w+'); // create sql file
 
     $prefix = substr(md5(date("YmdHis")),0, 5);
     $databaseName = $prefix.'_'.$databaseName;
@@ -55,6 +56,13 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
                     if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
                     break;
+                case "class":
+                    if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
+                    else fwrite($file, "klasa");
+                    fwrite($file, ' VARCHAR(4) NOT NULL');
+                    if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
+                    else fwrite($file, PHP_EOL); // if last, end of line
+                    break;
                 case "birthday":
                     if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
                     else fwrite($file, "data_ur");
@@ -69,20 +77,13 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
                     if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
                     else fwrite($file, PHP_EOL); // if last, end of line
                     break;
-                case "class":
-                    if(!empty($tables[$i][$j]['title'])) fwrite($file, $tables[$i][$j]['title']);
-                    else fwrite($file, "klasa");
-                    fwrite($file, ' VARCHAR(4) NOT NULL');
-                    if($j<count($tables[$i])-2) fwrite($file, ','.PHP_EOL); // if not last, write ","
-                    else fwrite($file, PHP_EOL); // if last, end of line
-                    break;
             }
         }
         fwrite($file, ');'.PHP_EOL);
         fwrite($file, 'INSERT INTO `'.$tables[$i]['title'].'` VALUES '.PHP_EOL); // insert to X tables
         for($k=0;$k<$rowsNumber;$k++){ // for K rows
             $gender = rand(0,1);
-            $temp_class = "";
+            $temp_class = "0";
             $temp_date = "";
             fwrite($file, '(');
             for($j=0;$j<count($tables[$i])-1;$j++) { // for each column
@@ -115,6 +116,11 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
                         }
                         if($j<count($tables[$i])-2) fwrite($file, ', '); // if not last, write ", "
                         break;
+                    case "class": // case if class
+                        $temp_class = rand(1,4).chr(rand(65,70));
+                        fwrite($file, '"'.$temp_class.'"');
+                        if($j<count($tables[$i])-2) fwrite($file, ', '); // if not last, write ", "
+                        break;
                     case "birthday": // case if birthday
                         switch($temp_class[0]){
                             case "1":
@@ -132,6 +138,10 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
                             case "4":
                                 $temp_date_start = strtotime("2001-01-01");
                                 $temp_date_end = strtotime("2001-12-31");
+                                break;
+                            default:
+                                $temp_date_start = strtotime("1960-01-01");
+                                $temp_date_end = strtotime("2000-12-31");
                                 break;
                         }
                         $temp_date = date("Y-m-d", mt_rand($temp_date_start, $temp_date_end));
@@ -151,11 +161,6 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
                         fwrite($file, rand(0,9).'"'); // random control digit
                         if($j<count($tables[$i])-2) fwrite($file, ', '); // if not last, write ", "
                         break;
-                    case "class": // case if class
-                        $temp_class = rand(1,4).chr(rand(65,70));
-                        fwrite($file, '"'.$temp_class.'"');
-                        if($j<count($tables[$i])-2) fwrite($file, ', '); // if not last, write ", "
-                        break;
                 }
             }
             if($k<$rowsNumber-1)fwrite($file, '), '.PHP_EOL);
@@ -163,7 +168,9 @@ if (isset($_POST['predefined']) && isset($_POST['db_name']) && isset($_POST['db_
         }
     }
         fclose($file); // close file
-    echo 'Done.';
+    echo 'Done.<br><br>';
+    echo '<a href="'.$fileDirectory.'" download>Pobierz plik</a>';
+
 } else {
     echo 'Brak danych.<br><a href="index.html">Powrót</a>';
 }
