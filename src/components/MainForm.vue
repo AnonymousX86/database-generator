@@ -237,6 +237,7 @@
                                 required
                               >
                                 <option v-if="i === 1" value="id">ID</option>
+                                <!-- TODO data powinna być zawsze przed numerem PESEL -->
                                 <option
                                   v-for="(column, index) of columnsSchemes"
                                   :key="index"
