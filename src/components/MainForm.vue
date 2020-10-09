@@ -40,9 +40,7 @@
           <!-- Predefined -->
           <b-row class="text-center text-sm-left">
             <b-col sm="6">
-              <label for="predefined">
-                Ustawienia predefiniowane
-              </label>
+              <label for="predefined">Ustawienia predefiniowane</label>
             </b-col>
             <b-col sm="6">
               <select
